@@ -1,19 +1,7 @@
-var http    = require('http'),
-    io      = require('socket.io'),
-    fs      = require('fs');
-http = http.createServer(
-    function (req, res) {
-        fs.readFile(__dirname+'/index.html',
-		function(err, data){res.writeHead(200);res.end(data);});
-	}).listen(80);
-io = io.listen(http);
-io.sockets.on('connection',function(socket){ 
-    socket.emit('msg',{'msg':'connect success'});
-	socket.broadcast.emit('msg',{'msg':'new one connect success'});
-    socket.on('msg',function(data){
-        socket.broadcast.emit('msg',data);
-    });
-});
-io.sockets.on('disconnection',function(socket){ 
-	socket.broadcast.emit('msg',{'msg':' one leave'});
-});
+var http = require("http");
+
+http.createServer(function(request, response) {
+  response.writeHead(200, {"Content-Type": "text/plain"});
+  response.write("Hello World");
+  response.end();
+}).listen(80,function(){console.log("Listen 2333 success")});
