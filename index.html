@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Digimon~</title>
+<style>
+*{margin:0;padding:0}
+body{}
+ #wall{position:absolute;top:0;width:100%;height:100%}
+ #container{position:absolute;top:0;background-color:#16D9F9;width:100%;height:100%;
+ display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:center;
+ /*display:flex;flex-direction:column*/}
+    header{width:800px;height:100px;background-color:#15A4E9;/*margin:0 auto*/}
+    #content{width:1000px/*margin:auto*/}
+	#black{-webkit-box-flex:1}
+    footer{width:1000px;height:100px;background-color:#9712E4;/*margin:0 auto*/}
+ #face{position:absolute;top:0;width:100%;height:100%;display:-webkit-inline-box;
+ -webkit-box-align:center;-webkit-box-pack:center}
+    #box{width:500px;height:500px;border:5px ridge #0BC8F8;background-color:#C6D8FC;
+	border-radius:10px;box-shadow: 0px 0px 85px #0E8DE9;-webkit-box-shadow: 0px 0px 85px  #0E8DE9;}
+</style>
+</head>
+<body>
+
+<div id="wall"></div>
+
+<div id="container">
+  <header></header>
+  <div id="content">
+  <textarea id="text1"></textarea><input type='button' value='发送' id='sub'>
+
+  </div>
+  <div id="black"></div>
+  <footer></footer>
+</div>
+
+<div id="face" style="display:none">
+  <div id="box"></div>
+</div>
+
+</body>
+<script type="text/javascript" src="http://www.wuwumi.com:8888/data/jquery-2.0.2.min.js"></script>
+<script type="text/javascript" src="/socket.io/socket.io.js "></script>
+<script type="text/javascript">
+var socket = io.connect('http://www.wuwumi.com/');
+socket.on('msg', function(json) {
+				$("#content").append(json.msg+'<br>')
+		});	
+function sendMsg() {
+	var str=$("#text1").val();
+	if(str.length!=0){
+       $("#content").append(str+'<br>')
+       socket.emit('msg', {'msg': str});
+       }
+	$("#text1").val('');
+}
+$("#sub").click(function(){sendMsg()})
+$("#text1").keypress(function(event){if(event.keyCode==13){sendMsg()}})
+</script>
+</html>
