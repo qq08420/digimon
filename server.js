@@ -5,7 +5,7 @@ http = http.createServer(
     function (req, res) {
         fs.readFile(__dirname+'/index.html',
 		function(err, data){res.writeHead(200);res.end(data);});
-	}).listen(8888);
+	}).listen(80);
 io = io.listen(http);
 io.sockets.on('connection',function(socket){ 
     socket.emit('msg',{'msg':'connect success'});
