@@ -10,7 +10,6 @@ io = io.listen(http);
 io.sockets.on('connection',function(socket){ 
 	socket.on('userInfo',function(data){
 	   socket.emit('tip',{'msg':'connect success'});
-	   socket.broadcast.emit('tip',{'msg':data.userName+'success'});
     });
     
 	socket.on('tip',function(data){
