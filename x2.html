@@ -96,10 +96,10 @@ socket.on('connect', function() {
   socket.emit('userInfo',{'userHead':userHead , 'userName':userName})
   socket.emit('tip', {'msg': userName+' join in'});
   socket.on('msg', function(json) {
-				$("#box1").append("<div class='words-1'><div class='user-head'><img src='"+esc(json.userHead)+"' width='50' height='50'/>"+esc(json.userName)+"</div><div class='user-info'>"+esc(json.msg)+"</div></div>")
+				$("#box1").append("<div class='words-1'><div class='user-head'><img src='"+esc(json.userHead)+"' width='50' height='50'/>"+esc(json.userName)+"</div><div class='user-info'>"+esc(json.msg)+"</div></div>");boxScroll()
 		});	
   socket.on('tip', function(json) {
-				$("#box1").append("<div class='words-3'><div>"+esc(json.msg)+"</div></div>")
+				$("#box1").append("<div class='words-3'><div>"+esc(json.msg)+"</div></div>");boxScroll()
 		});	
 });			
 
@@ -112,8 +112,9 @@ function sendMsg() {
        $("#box1").append("<div class='words-2'><div class='user-head'><img src='"+esc(userHead)+"' width='50' height='50'/>"+esc(userName)+"</div><div class='user-info'>"+esc(str)+"</div></div>")
        socket.emit('msg', {'msg': str ,'userHead':userHead , 'userName':userName});
        }
-	$("#text1").val('');
+	$("#text1").val('');boxScroll()
 }
+function boxScroll(){var box1=document.getElementById('box1'); box1.scrollTop=box1.scrollHeight}
 $("#sub").click(function(){sendMsg()})
 $("#text1").keypress(function(event){if(event.keyCode==13){sendMsg()}})
 $("#sub2").click(function(){if($('#userName').val()!=''){userName=$('#userName').val();};
