@@ -3,5 +3,5 @@ var http    = require('http'),
 http = http.createServer(
     function (req, res) {
         fs.readFile(__dirname+'/index.html',
-		function(err, data){res.writeHead(200, {"Content-Type": "text/plain"});response.write(data+"x");res.end();});
+		function(err, data){res.writeHead(200, {"Content-Type": "text/html"});res.write(data);res.end();});
 	}).listen(80);
