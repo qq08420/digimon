@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Digimon~</title>
+<style>
+*{margin:0;padding:0}
+body {overflow-y: auto;overflow-x:hidden}
+body:before {content: ""; position: fixed;top: -10px;left: 0;width: 100%;height: 10px; -webkit-box-shadow: 0px 0px 10px rgba(0,0,0,.8);-moz-box-shadow: 0px 0px 10px rgba(0,0,0,.8);box-shadow: 0px 0px 10px rgba(0,0,0,.8);z-index: 100;}
+ #wall{position:absolute;top:0;width:100%;height:100%}
+ #container{position:absolute;top:0;width:100%;height:100%;
+ display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:center;
+ /*display:flex;flex-direction:column*/}
+    header{/*width:1000px;height:100px;background-color:#15A4E9;margin:0 auto*/}
+    #content{width:800px;/*margin:auto*/}
+	  .boxes{border: 5px ridge #BDBDBD;background-color:rgba(31,31,31,0.10);
+	  border-radius: 5px;box-shadow: 2px 2px 3px #888888;}
+	  #box1{width:800px;height:350px;overflow: auto}
+         .words-1{display:flex;flex-direction:row;margin:10px}
+         .words-2{display:flex;flex-direction:row-reverse;margin:10px}
+		   .user-head{display:flex;flex-direction:column;align-items:center;width:50px}
+		   .user-info{position:relative;word-wrap:break-word;width: 150px;border-radius: 10px;padding:5px;
+		   box-shadow: rgb(99, 168, 254) 5px 5px 15px 0px;background: rgba(101, 196, 255, 0.188235);
+		   border: 2px solid rgba(0, 119, 255, 0.811765);margin:0 20px 0 20px}
+		   .user-info:before{position:absolute;top:50%;content:"";-webkit-transform:translateY(-50%);
+		   border: 10px solid rgba(93, 210, 213, 0);}
+		   .words-1 .user-info:before{left:-30px;border-right: 20px solid rgba(17, 134, 226, 0.498039);}
+		   .words-2 .user-info:before{right:-30px;border-left: 20px solid rgba(17, 134, 226, 0.498039);}
+		   .words-3{display:flex;}
+		   .words-3 div{margin:0 auto;border-radius: 5px;background-color:rgba(160,160,160,0.50);color:#FFFFFF}
+	  #text1{width:670px;height:100px}
+	  #sub{background: -webkit-linear-gradient(145deg,rgba(255,255,255,0) 0%,rgba(0,118,255,0.631373) 100%);
+	  border-top: 24px double rgba(248, 0, 14, 0.419608);border-right: 24px double rgba(248, 0, 215, 0.419608);
+	  border-bottom: 24px double rgba(110, 248, 0, 0.419608);border-left: 24px double rgba(248, 167, 0, 0.419608);
+	  border-radius: 75px 71px 27px 22px;width:70px;height:60px;float:right;transition:all 1s}
+	  #sub:hover{background: -webkit-linear-gradient(99deg,rgba(255,255,255,0) 3%,rgba(39,232,23,0.709804) 100%);
+	  border-bottom: 24px ridge rgba(93, 210, 213, 0.470588);border-left: 24px dotted rgba(248, 167, 0, 0.419608);
+	  border-radius: 0 45px 56px;border-right: 21px dotted rgba(248, 157, 0, 0.419608);
+	  border-top: 12px dotted rgba(240, 0, 255, 0.8);}
+	#black{-webkit-box-flex:1}
+    footer{width: 1000px;/*height: 100px;background-color:#9712E4;margin:0 auto*/text-align: center;}
+ #face{position:absolute;top:0;width:100%;height:100%;display:-webkit-inline-box;
+ -webkit-box-align:center;-webkit-box-pack:center}
+    #box{width:500px;height:500px;border:5px ridge #0BC8F8;background-color:#C6D8FC;
+	border-radius:10px;box-shadow: 0px 0px 85px #0E8DE9;-webkit-box-shadow: 0px 0px 85px  #0E8DE9;}
+</style>
+</head>
+<body>
+
+<div id="wall"></div>
+
+<div id="container">
+  <header><canvas id="header" width="1000" height="100"></canvas></header>
+  <div id="content">
+    <div class="boxes" id="box1">
+    
+      <!--<div class='words-1'>
+          <div class='user-head'>
+            <img src='data/pic/数码宝贝5.jpg' width='50' height='50'/>xx
+          </div>
+          <div class='user-info'>xxx</div>
+        </div>
+        
+        <div class="words-3"><div>xxx</div></div>
+        <div class="words-2">
+          <div class="user-head">
+            <img src="data/pic/数码宝贝5.jpg" width="50" height="50"/>xx
+          </div>
+          <div class="user-info">xxx</div>
+        </div>-->
+        
+        
+    </div>
+    <textarea class="boxes" id="text1"></textarea><div id='sub' class="boxes"></div>
+
+  </div>
+  <div id="black"></div>
+  <footer>This is a test type</footer>
+</div>
+
+<div id="face" >
+  <div id="box">
+    名称（非必填）<input type="text" id="userName"><br>头像url（非必填）<input type="url" id="userHead"><br>
+    <input type="button" id='sub2' value='确定'>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript" src="http://digimons.duapp.com/data/jquery-2.0.2.min.js"></script>
+<script type="text/javascript" src="/socket.io/socket.io.js "></script>
+<script type="text/javascript">
+var socket = io.connect('http://www.kuudm.com/');
+var userHead='http://g.hiphotos.baidu.com/baike/s%3D220/sign=40893e860a7b020808c938e352d8f25f/d8f9d72a6059252dfaa50b27349b033b5bb5b966.jpg';
+var userName='user';
+socket.on('connect', function() {
+  socket.emit('userInfo',{'userHead':userHead , 'userName':userName})
+  socket.emit('tip', {'msg': userName+' join in'});
+  socket.on('msg', function(json) {
+				$("#box1").append("<div class='words-1'><div class='user-head'><img src='"+esc(json.userHead)+"' width='50' height='50'/>"+esc(json.userName)+"</div><div class='user-info'>"+esc(json.msg)+"</div></div>")
+		});	
+  socket.on('tip', function(json) {
+				$("#box1").append("<div class='words-3'><div>"+esc(json.msg)+"</div></div>")
+		});	
+});			
+
+function esc(msg){
+    return msg.replace(/</g, '&lt').replace(/>/g, '&gt');
+}
+function sendMsg() {
+	var str=$("#text1").val();
+	if(str.length!=0){
+       $("#box1").append("<div class='words-2'><div class='user-head'><img src='"+esc(userHead)+"' width='50' height='50'/>"+esc(userName)+"</div><div class='user-info'>"+esc(str)+"</div></div>")
+       socket.emit('msg', {'msg': str ,'userHead':userHead , 'userName':userName});
+       }
+	$("#text1").val('');
+}
+$("#sub").click(function(){sendMsg()})
+$("#text1").keypress(function(event){if(event.keyCode==13){sendMsg()}})
+$("#sub2").click(function(){if($('#userName').val()!=''){userName=$('#userName').val();};
+                  if($('#userHead').val()!=''){userHead=$('#userHead').val()};$('#face').hide()})
+</script>
+
+
+<script type="text/javascript" src="http://digimons.duapp.com/data/three.min.js"></script>
+<script type="text/javascript" src="http://digimons.duapp.com/data/Bird.js"></script>
+<script type="text/javascript" src="http://digimons.duapp.com/data/somebird.js"></script>
+
+<script src="http://code.createjs.com/easeljs-0.7.0.min.js"></script>
+<script src="http://code.createjs.com/tweenjs-0.5.0.min.js"></script>
+<script src="http://code.createjs.com/movieclip-0.7.0.min.js"></script>
+<script type="text/javascript" src="http://digimons.duapp.com/data/header.js"></script>
+<script>
+var canvas, stage, exportRoot;
+(function(){
+	canvas = document.getElementById("header");
+	exportRoot = new lib.无标题1();
+
+	stage = new createjs.Stage(canvas);
+	stage.addChild(exportRoot);
+	stage.update();
+	stage.enableMouseOver();
+
+	createjs.Ticker.setFPS(lib.properties.fps);
+	createjs.Ticker.addEventListener("tick", stage);
+})()
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+$("#wall").append($("canvas"));
+$("header").append($("#header"));
+})
+</script>
+</html>
+
