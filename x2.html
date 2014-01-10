@@ -116,7 +116,7 @@ function sendMsg() {
 }
 function boxScroll(){var box1=document.getElementById('box1'); box1.scrollTop=box1.scrollHeight}
 $("#sub").click(function(){sendMsg()})
-$("#text1").keypress(function(event){if(event.keyCode==13){sendMsg()}})
+$("#text1").keyup(function(event){if(event.keyCode==13){sendMsg()}})
 $("#sub2").click(function(){if($('#userName').val()!=''){userName=$('#userName').val();};
                   if($('#userHead').val()!=''){userHead=$('#userHead').val()};$('#face').hide()})
 </script>
