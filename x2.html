@@ -107,7 +107,7 @@ function esc(msg){
     return msg.replace(/</g, '&lt').replace(/>/g, '&gt');
 }
 function sendMsg() {
-	var str=$("#text1").val();str=str.replace(/\n/g,'');
+	var str=$("#text1").val();/*str=str.replace(/\n/g,'');*/
 	if(str.length!=0){
        $("#box1").append("<div class='words-2'><div class='user-head'><img src='"+esc(userHead)+"' width='50' height='50'/>"+esc(userName)+"</div><div class='user-info'>"+esc(str)+"</div></div>")
        socket.emit('msg', {'msg': str ,'userHead':userHead , 'userName':userName});
@@ -116,7 +116,7 @@ function sendMsg() {
 }
 function boxScroll(){var box1=document.getElementById('box1'); box1.scrollTop=box1.scrollHeight}
 $("#sub").click(function(){sendMsg()})
-$("#text1").keyup(function(event){if(event.keyCode==13){sendMsg()}})
+$("#text1").keypress(function(event){if(event.keyCode==13){event.preventDefault();sendMsg()}})
 $("#sub2").click(function(){if($('#userName').val()!=''){userName=$('#userName').val();};
                   if($('#userHead').val()!=''){userHead=$('#userHead').val()};$('#face').hide()})
 </script>
